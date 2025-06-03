@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王晓媛的简历</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes colorChange {
+            0% { color: #4a90e2; }
+            50% { color: #2c3e50; }
+            100% { color: #4a90e2; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            animation-delay: 0.2s;
+        }
+        .profile-img {
+            border-radius: 50%;
+            border: 3px solid #4a90e2;
+            margin: 10px 0;
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
+        }
+        .profile-img:hover {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+            animation: colorChange 8s infinite;
+        }
+        h2 {
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+            padding-bottom: 5px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        h2:hover {
+            transform: translateX(5px);
+            color: #2c3e50;
+        }
+        h3 {
+            margin: 10px 0;
+            font-weight: normal;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            animation-delay: 0.4s;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .contact-info h3 {
+            width: 48%;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        .contact-info h3:hover {
+            transform: scale(1.02);
+            color: #4a90e2;
+        }
+        .section {
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .links {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+        }
+        .links a {
+            text-decoration: none;
+            color: #4a90e2;
+            font-weight: bold;
+            padding: 8px 15px;
+            border: 1px solid #4a90e2;
+            border-radius: 4px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: bounce 2s infinite;
+        }
+        .links a:hover {
+            background-color: #4a90e2;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        li:hover {
+            color: #4a90e2;
+            transform: translateX(5px);
+        }
+        li::before {
+            content: "•";
+            color: #4a90e2;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        /* 为不同部分设置不同的动画延迟 */
+        .section:nth-child(1) { animation-delay: 0.3s; }
+        .section:nth-child(2) { animation-delay: 0.5s; }
+        .section:nth-child(3) { animation-delay: 0.7s; }
+        .section:nth-child(4) { animation-delay: 0.9s; }
+        .section:nth-child(5) { animation-delay: 1.1s; }
+        .section:nth-child(6) { animation-delay: 1.3s; }
+        
+        @media (max-width: 600px) {
+            .contact-info h3 {
+                width: 100%;
+            }
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .links a {
+                margin: 5px 0;
+                width: 80%;
+                text-align: center;
+            }
+            .section:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header section">
+        <h1>王晓媛的个人简历</h1>
+        <img src="1.png" alt="王晓媛的个人照片" class="profile-img" width="120">
+    </div>
+
+    <div class="links section">
+        <a href="https://w-x-yuan.github.io/w-form.html">个人信息表单</a>
+        <a href="https://w-x-yuan.github.io/home.html">学校布局</a>
+    </div>
+
+    <div class="section">
+        <h2>基本信息</h2>
+        <div class="contact-info">
+            <h3><strong>姓名：</strong>王晓媛</h3>
+            <h3><strong>性别：</strong>女</h3>
+            <h3><strong>年龄：</strong>20岁</h3>
+            <h3><strong>电话：</strong>139 xxxx 5896</h3>
+            <h3><strong>邮箱：</strong>example@email.com</h3>
+            <h3><strong>籍贯：</strong>河北省张家口市</h3>
+            <h3><strong>现居地：</strong>上海市</h3>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>教育背景</h2>
+        <table>
+            <tr>
+                <th>时间</th>
+                <th>学校</th>
+                <th>专业/职务</th>
+                <th>学历</th>
+            </tr>
+            <tr>
+                <td>2020.9-2023.6</td>
+                <td>河北武邑中学</td>
+                <td>物化生学生</td>
+                <td>高中</td>
+            </tr>
+            <tr>
+                <td>2023.9-2027.6</td>
+                <td>上海对外经贸大学</td>
+                <td>会展经济与管理专业</td>
+                <td>本科(在读)</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>实习经历</h2>
+        <h3><strong>宝龙美术馆 | 展览部实习生</strong> (2024.7-2024.8)</h3>
+        <ul>
+            <li>协助策划和执行艺术展览项目</li>
+            <li>负责展品信息整理和档案管理</li>
+            <li>参与展览现场布置和观众引导工作</li>
+            <li>协助处理艺术家和参观者的沟通协调</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>专业技能</h2>
+        <ul>
+            <li>熟悉会展策划与项目管理流程</li>
+            <li>具备良好的活动组织和协调能力</li>
+            <li>熟练使用Office办公软件(Word, Excel, PowerPoint)</li>
+            <li>基础HTML网页制作能力</li>
+            <li>英语CET-4(可添加具体分数)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>自我评价</h2>
+        <p>我是上海对外经贸大学会展经济与管理专业的大二学生王晓媛，来自河北。性格开朗，责任心强，具有良好的团队合作精神和沟通能力。对会展行业充满热情，在宝龙美术馆的实习经历让我对展览策划和执行有了更深入的理解。学习能力强，能够快速适应新环境和新挑战。</p>
+    </div>
+
+    <div class="section">
+        <h2>兴趣爱好</h2>
+        <p>艺术展览参观、阅读、旅行、摄影</p>
+    </div>
+
+    <script>
+        // 添加滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const isVisible = (rect.top <= window.innerHeight * 0.8);
+                    
+                    if (isVisible) {
+                        section.style.opacity = '1';
+                    }
+                });
+            }
+            
+            // 初始检查
+            checkVisibility();
+            
+            // 滚动时检查
+            window.addEventListener('scroll', checkVisibility);
+        });
+    </script>
+</body>
+</html>
