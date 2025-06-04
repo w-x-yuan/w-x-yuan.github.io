@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>饼状图</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #canvas-container {
+            position: relative;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+        .tooltip {
+            position: absolute;
+            padding: 8px 12px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            pointer-events: none;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container">
+        <canvas id="pie-chart" width="800" height="600"></canvas>
+        <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <script>
+        const data = [
+            { title: "apple", value: 0.24, color: "green" },
+            { title: "三星", value: 0.26, color: "yellow" },
+            { title: "华为", value: 0.13, color: "orange" },
+            { title: "锤子", value: 0.17, color: "red" },
+            { title: "小米", value: 0.08, color: "purple" },
+            { title: "其他", value: 0.12, color: "cyan" }
+        ];
+        const canvas = document.getElementById("pie-chart");
+        const ctx = canvas.getContext("2d");
+        const width = 800, height = 600;
+        const centerX = width / 2, centerY = height / 2;
+        const radius = 200;
+        let startAngle = 0;
+        let hoverIndex = -1;
+
+        function drawPieChart() {
+            ctx.clearRect(0, 0, width, height);
+
+            data.forEach((item, index) => {
+                const endAngle = startAngle + item.value * 2 * Math.PI;
+                const isHover = index === hoverIndex;
+                const currentRadius = isHover ? radius + 20 : radius;
+
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, currentRadius, startAngle, endAngle);
+                ctx.lineTo(centerX, centerY);
+                ctx.closePath();
+
+                ctx.fillStyle = item.color;
+                ctx.fill();
+
+                if (isHover) {
+                    ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
+                    ctx.shadowBlur = 10;
+                    ctx.shadowOffsetX = 2;
+                    ctx.shadowOffsetY = 2;
+                    ctx.fill(); 
+                    ctx.shadowColor = "transparent"; 
+                }
+
+                startAngle = endAngle;
+            });
+
+            startAngle = 0; 
+        }
+
+        canvas.addEventListener("mousemove", (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            const dx = mouseX - centerX;
+            const dy = mouseY - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance > radius + 20) {
+                hoverIndex = -1;
+                document.getElementById("tooltip").style.display = "none";
+            } else {
+                let mouseAngle = Math.atan2(dy, dx);
+                if (mouseAngle < 0) mouseAngle += 2 * Math.PI; 
+
+                const sectorAngles = [0];
+                let currentAngle = 0;
+                
+                data.forEach(item => {
+                    currentAngle += item.value * 2 * Math.PI;
+                    sectorAngles.push(currentAngle);
+                });
+
+                let foundIndex = -1;
+                for (let i = 0; i < data.length; i++) {
+                    const start = sectorAngles[i];
+                    const end = sectorAngles[i + 1];
+
+                    if (end >= 2 * Math.PI) {
+                        if (mouseAngle >= start || mouseAngle <= (end - 2 * Math.PI)) {
+                            foundIndex = i;
+                            break;
+                        }
+                    } else {
+                        if (mouseAngle >= start && mouseAngle <= end) {
+                            foundIndex = i;
+                            break;
+                        }
+                    }
+                }
+
+                hoverIndex = foundIndex;
+
+                if (foundIndex !== -1) {
+                    const tooltip = document.getElementById("tooltip");
+                    tooltip.style.display = "block";
+                    tooltip.style.left = `${e.clientX + 10}px`;
+                    tooltip.style.top = `${e.clientY + 10}px`;
+                    tooltip.textContent = `${data[foundIndex].title}: ${(data[foundIndex].value * 100).toFixed(1)}%`;
+                } else {
+                    document.getElementById("tooltip").style.display = "none";
+                }
+            }
+
+            drawPieChart(); 
+        });
+        
+        drawPieChart();
+    </script>
+</body>
+</html>
