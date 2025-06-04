@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #container {
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+        #list {
+            width: 3000px; 
+            height: 400px;
+            position: absolute;
+            left: 0;
+        }
+        #list img {
+            float: left;
+            width: 600px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="list">
+            <img src="1.jpg" alt="">
+            <img src="2.jpg" alt="">
+            <img src="3.jpg" alt="">
+            <img src="4.jpg" alt="">
+            <img src="5.jpg" alt="">
+        </div>
+    </div>
+
+    <script>
+        let index = 0;
+        const list = document.getElementById("list");
+        const imgWidth = 600; 
+
+        setInterval(() => {
+            index++;
+            if (index >= 5) index = 0; 
+            list.style.left = `-${index * imgWidth}px`;
+        }, 3000); 
+    </script>
+</body>
+</html>
