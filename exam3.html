@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #container {
+            width: 600px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        #list {
+            width: 3000px;
+            height: 400px;
+            position: absolute;
+            left: 0;
+        }
+        #list img { float: left; width: 600px; height: 400px; }
+        #buttons { position: absolute; bottom: 20px; left: 250px; }
+        #buttons span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            background: #333;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        #buttons span.on { background: orangered; }
+        .arrow {
+            position: absolute;
+            top: 180px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            display: none;
+        }
+        #container:hover .arrow { display: block; }
+        #prev { left: 20px; }
+        #next { right: 20px; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="list">
+            <img src="1.jpg" alt="">
+            <img src="2.jpg" alt="">
+            <img src="3.jpg" alt="">
+            <img src="4.jpg" alt="">
+            <img src="5.jpg" alt="">
+        </div>
+        <div id="buttons"></div>
+        <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+        <a href="javascript:;" id="next" class="arrow">&gt;</a>
+    </div>
+
+    <script>
+        let index = 0;
+        const list = document.getElementById("list");
+        const imgWidth = 600;
+        const buttons = document.getElementById("buttons");
+        const total = 5; 
+
+        for (let i = 0; i < total; i++) {
+            const span = document.createElement("span");
+            span.onclick = () => changeImg(i);
+            buttons.appendChild(span);
+        }
+        buttons.children[0].classList.add("on");
+
+        function changeImg(n) {
+            index = n;
+            list.style.left = `-${index * imgWidth}px`;
+            Array.from(buttons.children).forEach(span => span.classList.remove("on"));
+            buttons.children[index].classList.add("on");
+        }
+
+        document.getElementById("prev").onclick = () => changeImg(index === 0 ? total - 1 : index - 1);
+        document.getElementById("next").onclick = () => changeImg(index === total - 1 ? 0 : index + 1);
+    </script>
+</body>
+</html>
